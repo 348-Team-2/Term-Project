@@ -28,4 +28,4 @@ In summary the project will be able to:
 | Bug Report Template                  | `\.github\ISSUE_TEMPLATES\bug_report.md`      |
 | Feature Request Template             | `\.github\ISSUE_TEMPLATES\feature_request.md` |
 | Meeting Notes                        | `\doc\meetings\*`                             |
-
+| Software Architecture Document       | https://docs.google.com/document/d/1o_5SL45ULUP-f_YNWSnwo0gd9OCWSD2snJbFTeQhOio/edit?tab=t.0 |
