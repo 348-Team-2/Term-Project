@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include "Def_Value.hpp"
 
 /// @brief n-ary mathematical function
 /// @note Allows an arbitrary number of arguments passed via vector
@@ -15,9 +16,9 @@ struct FunctionStruct
     int expected_args;
 
     /// @brief The executable logic for the function
-    /// @param args A vector containing the evaluated numeric arguments
-    /// @return The calculated result
+    /// @param args A vector containing the evaluated arguments (Scalars, Vectors, etc.)
+    /// @return The calculated result as a Value
     /// @throws std::invalid_argument if size of args does not match expected_args
     /// @throws std::runtime_error for invalid arguments
-    std::function<double(const std::vector<double>&)> evaluate;
+    std::function<Value(const std::vector<Value>&)> evaluate;
 };

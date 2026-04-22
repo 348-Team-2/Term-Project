@@ -3,6 +3,10 @@
 #include <string>
 #include <functional>
 
+#include "def_value.hpp"
+
+// TODO: IDEA Estimate if there will be float/double mistakes?
+
 /// @brief Defines associativity for parser AST construction
 enum class Associativity {
     LEFT,
@@ -30,11 +34,11 @@ struct OperatorStruct
     /// @param b The right operand
     /// @return The calculated result of the operation
     /// @throws std::runtime_error for invalid math states
-    std::function<double(double,double)> evaluate_binary;
+    std::function<Value(const Value&, const Value&)> evaluate_binary;
 
     /// @brief The executable logic for a unary operation
     /// @param a The single operand
     /// @return The calculated result
     /// @warning See evaluate_binary
-    std::function<double(double)> evaluate_unary;
+    std::function<Value(const Value&)> evaluate_unary;
 };
