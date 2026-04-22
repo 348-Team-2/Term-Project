@@ -1,0 +1,35 @@
+/**
+ * @mainpage Registry Module (reg)
+ *
+ * @section intro_sec Introduction
+ * Welcome to the Registry module! This subsystem acts as the central "brain" or dictionary
+ * for the CLI calculator.
+ *
+ * Instead of hardcoding mathematical operations (like `+` or `sin()`) directly into the
+ * Parser or Evaluator using massive `switch` statements, everything is stored here.
+ * The Lexer only identifies tokens, the Parser only builds the Abstract Syntax Tree (AST),
+ * and the Evaluator queries this Registry to execute the actual mathematics.
+ *
+ * @section arch_sec Architecture: The Value Type
+ * To allow the calculator to scale beyond standard arithmetic, we utilize a type-safe union:
+ * @code
+ * using Value = std::variant<double, std::complex<double>, Vector, Matrix, Tensor, Set>;
+ * @endcode
+ * This ensures the pipeline can handle standard numeric constants now, while being fully
+ * extensible for linear algebra and complex numbers in the future without rewriting the core pipeline.
+ *
+ * @section usage_sec Pipeline Interfacing
+ * Depending on the pipeline component, the Registry provides specific interfaces:
+ * * @subsection lexer_usage Lexer
+ * Use Registry::is_operator() to verify if a string token maps to a valid mathematical operation.
+ * * @subsection parser_usage Parser
+ * Use Registry::get_precedence() and Registry::get_associativity() to enforce standard
+ * order of operations (PEMDAS) when constructing the AST.
+ * * @subsection eval_usage Evaluator
+ * Use Registry::evaluate_binary(), Registry::evaluate_unary(), and Registry::evaluate_function()
+ * to compute the results of AST nodes.
+ *
+ * @section ext_sec Extending the Calculator
+ * To add new operations, developers only need to modify `load_standard_math()` or `load_functions()`
+ * inside `standard_math.cpp`. The core pipeline requires no modifications.
+ */
