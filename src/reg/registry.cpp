@@ -27,6 +27,16 @@ bool Registry::is_operator(const std::string& symbol) const {
     return operators.contains(symbol);
 }
 
+bool Registry::is_const(const std::string& name) const
+{
+    return constants.contains(name);
+}
+
+bool Registry::is_funct(const std::string& name) const
+{
+    return functions.contains(name);
+}
+
 int Registry::get_precedence(const std::string& symbol) const {
     const auto it = operators.find(symbol);
     if (it == operators.end()) {
@@ -75,7 +85,6 @@ Value Registry::evaluate_unary(const std::string& symbol, const Value& operand) 
     return it->second.evaluate_unary(operand);
 }
 
-// Changed vector type to Value and return type to Value
 Value Registry::evaluate_function(const std::string& name, const std::vector<Value>& args) const {
     const auto it = functions.find(name);
 
@@ -92,7 +101,6 @@ Value Registry::evaluate_function(const std::string& name, const std::vector<Val
     return it->second.evaluate(args);
 }
 
-// Changed return type to Value
 Value Registry::get_constant(const std::string& name) const {
     const auto it = constants.find(name);
 

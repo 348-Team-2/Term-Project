@@ -77,6 +77,20 @@ public:
     bool is_operator(const std::string& symbol) const;
 
     /**
+     * @brief Checks if a parsed token string matches any registered constant.
+     * @param name The raw string from the token (e.g., "pi").
+     * @return true if the const exists in the registry, false otherwise.
+     */
+    bool is_const(const std::string& name) const;
+
+    /**
+     * @brief Checks if a parsed token string matches any registered function.
+     * @param name The raw string from the token (e.g., "SIN").
+     * @return true if the funct exists in the registry, false otherwise.
+     */
+    bool is_funct(const std::string& name) const;
+
+    /**
      * @brief Retrieves the priority level of an operator to determine evaluation order.
      * @param symbol The operator string to query.
      * @return An integer representing precedence (higher evaluates first).
