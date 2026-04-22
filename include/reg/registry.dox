@@ -20,13 +20,13 @@
  *
  * @section usage_sec Pipeline Interfacing
  * Depending on the pipeline component, the Registry provides specific interfaces:
- * * @subsection lexer_usage Lexer
- * Use Registry::is_operator() and similar functions to verify if a string token maps to a valid mathematical operation. This is marked by an "OPERATOR" comment.
- * * @subsection parser_usage Parser
- * Use Registry::get_precedence() and Registry::get_associativity() to enforce standard. This is marked by "PARSER" comment.
+ * @subsection lexer_usage Lexer
+ * Use \ref Registry::is_operator() and similar functions to verify if a string token maps to a valid mathematical operation.
+ * @subsection parser_usage Parser
+ * Use \ref Registry::get_precedence() and \ref Registry::get_associativity() to enforce standard.
  * order of operations (PEMDAS) when constructing the AST.
- * * @subsection eval_usage Evaluator
- * Use Registry::evaluate_binary(), Registry::evaluate_unary(), and Registry::evaluate_function(). This is marked by "EVALUATOR" comment.
+ * @subsection eval_usage Evaluator
+ * Use \ref Registry::evaluate_binary(), \ref Registry::evaluate_unary(), and \ref Registry::evaluate_function().
  * to compute the results of AST nodes.
  *
  * @section ext_sec Extending the Calculator
