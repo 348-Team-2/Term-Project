@@ -2,10 +2,10 @@
  * @mainpage Registry Module (reg)
  *
  * @section intro_sec Introduction
- * Welcome to the Registry module! This subsystem acts as the central "brain" or dictionary
+ * Welcome to the Registry module! This subsystem acts as the central dictionary
  * for the CLI calculator.
  *
- * Instead of hardcoding mathematical operations (like `+` or `sin()`) directly into the
+ * Instead of hardcoding mathematical operations directly into the
  * Parser or Evaluator using massive `switch` statements, everything is stored here.
  * The Lexer only identifies tokens, the Parser only builds the Abstract Syntax Tree (AST),
  * and the Evaluator queries this Registry to execute the actual mathematics.
@@ -21,12 +21,12 @@
  * @section usage_sec Pipeline Interfacing
  * Depending on the pipeline component, the Registry provides specific interfaces:
  * * @subsection lexer_usage Lexer
- * Use Registry::is_operator() to verify if a string token maps to a valid mathematical operation.
+ * Use Registry::is_operator() and similar functions to verify if a string token maps to a valid mathematical operation. This is marked by an "OPERATOR" comment.
  * * @subsection parser_usage Parser
- * Use Registry::get_precedence() and Registry::get_associativity() to enforce standard
+ * Use Registry::get_precedence() and Registry::get_associativity() to enforce standard. This is marked by "PARSER" comment.
  * order of operations (PEMDAS) when constructing the AST.
  * * @subsection eval_usage Evaluator
- * Use Registry::evaluate_binary(), Registry::evaluate_unary(), and Registry::evaluate_function()
+ * Use Registry::evaluate_binary(), Registry::evaluate_unary(), and Registry::evaluate_function(). This is marked by "EVALUATOR" comment.
  * to compute the results of AST nodes.
  *
  * @section ext_sec Extending the Calculator
