@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Def_Value.hpp" // Bring in the Value type
+#include "def_value.hpp" // Bring in the Value type
 
 /// @brief Static mathematical constant
 struct ConstantStruct

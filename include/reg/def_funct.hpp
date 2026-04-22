@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <functional>
-#include "Def_Value.hpp"
+#include "def_value.hpp"
 
 /// @brief n-ary mathematical function
 /// @note Allows an arbitrary number of arguments passed via vector
