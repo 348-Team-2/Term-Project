@@ -16,6 +16,18 @@ In summary the project will be able to:
 
 ## Documentation
 
+Code documentation is fully done using Doxygen. A pre-configured `Doxyfile` already exists in the repo.
+Install Doxygen either via the binary installer on Windows: [Doxygen website](https://www.doxygen.nl/download.html), 
+or run `sudo apt-get install doxygen` on Linux. Open terminal, navigate to the root directory of the project (you will
+see Doxyfile), and run 
+```bash 
+ doxygen Doxyfile
+```
+You will find the command generate an html/ and latex/ folder in your project root. Open html/index.html to view the 
+documentation.
+
+General documentation is held in this table.
+
 | Document                             | Path                                          |
 |--------------------------------------|-----------------------------------------------|
 | Programming Guidelines               | `\doc\SPD-GUIDE-xxxx-xx-xx.pdf`               |
