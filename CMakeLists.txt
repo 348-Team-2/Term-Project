@@ -11,7 +11,7 @@ include_directories(include)
 # Collect source files for the Registry module [cite: 75]
 set(REGISTRY_SOURCES
         src/reg/registry.cpp
-        src/reg/standard_math.cpp
+        src/reg/math.cpp
         # Add other .cpp files here as you create them
 )
 
