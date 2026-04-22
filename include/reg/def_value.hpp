@@ -1,3 +1,12 @@
+/**
+* @file def_value.hpp
+ * @brief Defines the core data types and the universal Value variant for the system.
+ * @details This file establishes the polymorphic type system used across the
+ * entire pipeline. By utilizing a std::variant, the Evaluator can handle
+ * scalars, complex numbers, and linear algebra structures (Vectors, Matrices, Tensors)
+ * through a single, unified interface.
+ */
+
 #pragma once
 
 #include <vector>

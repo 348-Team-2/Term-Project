@@ -1,3 +1,13 @@
+/**
+* @file def_funct.hpp
+ * @brief Defines the structural blueprint for n-ary mathematical functions.
+ * @details This file provides the FunctionStruct, which allows the Registry
+ * to store and execute named functions (e.g., sin, max, clamp). It utilizes
+ * a std::vector of Value types to support a variable number of arguments,
+ * enabling the system to handle everything from unary trigonometric functions
+ * to complex multi-argument operations.
+ */
+
 #pragma once
 
 #include <string>

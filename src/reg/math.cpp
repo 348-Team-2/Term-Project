@@ -1,3 +1,11 @@
+/**
+* @file standard_math.cpp
+ * @brief Defines and loads all default mathematical operations, functions, and constants.
+ * @details This file acts as the standard library for the CLI calculator.
+ * It isolates all the actual computational logic (using `<cmath>`) from the parsing
+ * pipeline, registering lambdas into the central Registry.
+ */
+
 #include "reg/registry.hpp"
 
 #include <cmath>

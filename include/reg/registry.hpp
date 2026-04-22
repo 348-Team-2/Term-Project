@@ -1,3 +1,11 @@
+/**
+* @file registry.hpp
+ * @brief Defines the Registry class which acts as the central repository for language rules.
+ * @details This header provides the interface for the Lexer, Parser, and Evaluator to
+ * interact with the mathematical engine. It manages the lifecycle and access of
+ * operators, functions, and constants.
+ */
+
 #pragma once
 
 #include <string>

@@ -1,3 +1,11 @@
+/**
+* @file registry.cpp
+ * @brief Implementation of the Registry class methods.
+ * @details This file defines the behavior for storing, querying, and executing
+ * mathematical operations, functions, and constants. It relies on `std::unordered_map`
+ * lookups to provide O(1) average time complexity for the Lexer, Parser, and Evaluator.
+ */
+
 #include "reg/registry.hpp"
 
 void Registry::register_operator(const OperatorStruct& def)

@@ -1,3 +1,12 @@
+/**
+* @file def_operator.hpp
+ * @brief Defines the structural blueprint for mathematical operators.
+ * @details This file provides the OperatorStruct and Associativity enum used
+ * to decouple mathematical logic from the parser. By defining precedence
+ * and associativity here, the Parser can build the Abstract Syntax Tree (AST)
+ * without needing to know the specific implementation of the math.
+ */
+
 #pragma once
 
 #include <string>
