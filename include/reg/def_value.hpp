@@ -18,7 +18,7 @@ struct Matrix {
     std::vector<double> data; // Flattened 1D array for O(1) cache-friendly access
 };
 
-/// @brief Represents an N-dimensional Tensor for arbitrary multi-dimensional math.
+/// @brief Represents an N-dimensional Tensor for arbitrary multidimensional math.
 struct Tensor {
     std::vector<size_t> shape;
     std::vector<double> data;
