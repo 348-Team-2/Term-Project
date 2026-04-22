@@ -6,8 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Define include directories so Intellisense can find your headers [cite: 76]
-include_directories(include/reg)
-include_directories(include/core)
+include_directories(include)
 
 # Collect source files for the Registry module [cite: 75]
 set(REGISTRY_SOURCES
