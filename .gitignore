@@ -57,3 +57,7 @@ dkms.conf
 # config files
 *.idea
 *.vscode
+
+#doxygen
+html/
+latex/
