@@ -20,9 +20,103 @@ protected:
 // ━━ 1. Test Lookups & Metadata ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TEST_F(RegistryTest, IdentifiesOperatorsCorrectly) {
+
+// ━━ OPERATORS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    // Logical
+    EXPECT_TRUE(reg.is_operator("||"));
+    EXPECT_TRUE(reg.is_operator("&&"));
+
+    // Bitwise
+    EXPECT_TRUE(reg.is_operator("|"));
+    EXPECT_TRUE(reg.is_operator("^"));
+    EXPECT_TRUE(reg.is_operator("&"));
+
+    // Equality / Inequality
+    EXPECT_TRUE(reg.is_operator("=="));
+    EXPECT_TRUE(reg.is_operator("!="));
+
+    // Relational (Comparison)
+    EXPECT_TRUE(reg.is_operator("<"));
+    EXPECT_TRUE(reg.is_operator("<="));
+    EXPECT_TRUE(reg.is_operator(">"));
+    EXPECT_TRUE(reg.is_operator(">="));
+
+    // Bitwise Shifts
+    EXPECT_TRUE(reg.is_operator("<<"));
+    EXPECT_TRUE(reg.is_operator(">>"));
+
+    // Basic Arithmetic
     EXPECT_TRUE(reg.is_operator("+"));
+    EXPECT_TRUE(reg.is_operator("-"));
+    EXPECT_TRUE(reg.is_operator("*"));
+    EXPECT_TRUE(reg.is_operator("/"));
+    EXPECT_TRUE(reg.is_operator("%"));
+    EXPECT_TRUE(reg.is_operator("//"));
     EXPECT_TRUE(reg.is_operator("**"));
+
+    // Prefix Unary
+    EXPECT_TRUE(reg.is_operator("u+"));
+    EXPECT_TRUE(reg.is_operator("u-"));
+    EXPECT_TRUE(reg.is_operator("u~"));
+    EXPECT_TRUE(reg.is_operator("u!"));
+
+    // Postfix Unary
+    EXPECT_TRUE(reg.is_operator("p!"));
+    EXPECT_TRUE(reg.is_operator("p%"));
+
+    // Implication & Equivalence
+    EXPECT_TRUE(reg.is_operator("->"));
+    EXPECT_TRUE(reg.is_operator("<->"));
+
+    // Operator Negative Tests (Including your TODOs)
     EXPECT_FALSE(reg.is_operator("not_an_op"));
+
+// ━━ FUNCTIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    // Trigonometric
+    EXPECT_TRUE(reg.is_funct("sin"));
+    EXPECT_TRUE(reg.is_funct("cos"));
+    EXPECT_TRUE(reg.is_funct("tan"));
+
+    // Inverse Trigonometric
+    EXPECT_TRUE(reg.is_funct("asin"));
+    EXPECT_TRUE(reg.is_funct("acos"));
+    EXPECT_TRUE(reg.is_funct("atan"));
+    EXPECT_TRUE(reg.is_funct("atan2"));
+
+    // Exponential & Logarithmic
+    EXPECT_TRUE(reg.is_funct("exp"));
+    EXPECT_TRUE(reg.is_funct("ln"));
+    EXPECT_TRUE(reg.is_funct("log"));
+
+    // Roots & Absolute Value
+    EXPECT_TRUE(reg.is_funct("sqrt"));
+    EXPECT_TRUE(reg.is_funct("abs"));
+
+    // Rounding, Utility & Bounding
+    EXPECT_TRUE(reg.is_funct("floor"));
+    EXPECT_TRUE(reg.is_funct("ceil"));
+    EXPECT_TRUE(reg.is_funct("max"));
+    EXPECT_TRUE(reg.is_funct("min"));
+    EXPECT_TRUE(reg.is_funct("clamp"));
+
+    // Function Negative Tests
+    EXPECT_FALSE(reg.is_funct("not_a_funct"));
+    EXPECT_FALSE(reg.is_funct("sine")); // Common typo check
+    EXPECT_FALSE(reg.is_funct("tangent"));
+
+// ━━ CONSTANTS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    EXPECT_TRUE(reg.is_const("pi"));
+    EXPECT_TRUE(reg.is_const("e"));
+    EXPECT_TRUE(reg.is_const("phi"));
+    EXPECT_TRUE(reg.is_const("tau"));
+    EXPECT_TRUE(reg.is_const("sqrt2"));
+
+    // Constant Negative Tests
+    EXPECT_FALSE(reg.is_const("not_a_const"));
+    EXPECT_FALSE(reg.is_const("PI"));
 }
 
 TEST_F(RegistryTest, ReturnsCorrectPrecedence) {

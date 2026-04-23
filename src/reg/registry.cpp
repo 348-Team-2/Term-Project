@@ -16,7 +16,7 @@ void Registry::register_operator(const OperatorStruct& def)
 void Registry::register_constant(const ConstantStruct& def) {
     constants[def.name] = def;
 }
-
+    
 void Registry::register_function(const FunctionStruct& def) {
     functions[def.name] = def;
 }
