@@ -1,0 +1,66 @@
+/**
+ * @page Lexer Lexer Module (lex)
+ *
+ * @section intro_sec Introduction
+ * Welcome to the Lexer module! This subsystem serves as the front-end scanner
+ * and the first stage of the CLI calculator's compilation pipeline.
+ *
+ * The Lexer's sole responsibility is to consume a raw string of user input character
+ * by character and translate it into a structured sequence of semantic units. It acts
+ * as the bridge between raw, unstructured text and the grammatical rules enforced
+ * by the Parser.
+ *
+ * @section arch_sec Architecture: Data-Driven Tokenization
+ * A core design philosophy of this Lexer is that it is completely ignorant of mathematical rules.
+ * It does not hardcode what a function is, nor does it define what characters make up an operator.
+ * * Instead, it relies entirely on the `Registry` module as its single source of truth.
+ * When the Lexer groups characters together, it queries the Registry (`registry.is_operator()`,
+ * `registry.is_funct()`) to validate them before constructing a Token.
+ *
+ * @subsection token_subsec The Token Structure
+ * Contained within this module's directory is `token.hpp`. The `Token` struct is the
+ * transport vehicle for the pipeline. Every validated lexeme is packaged into a `Token`
+ * containing:
+ * - Its categorical `TokenType` (e.g., `NUMBER`, `OPERATOR`, `FUNCTION`).
+ * - The raw string `lexeme` extracted from the input.
+ * - An encapsulated `Value` variant (if it is a literal number or recognized constant).
+ * - Spatial metadata (`line` and `column`) for precise error reporting in later stages.
+ *
+ * @section theory_sec Theory: The Maximal Munch Algorithm
+ * To cleanly handle multi-character operators (like `**`, `||`, or `<->`) without hardcoding
+ * string lengths, the Lexer implements the **Maximal Munch** (or greedy matching) algorithm.
+ *
+ * Maximal Munch dictates that the scanner should always attempt to consume the longest
+ * possible valid string of characters.
+ * 1. The Lexer encounters a symbol character (e.g., `<`).
+ * 2. It groups all immediately following contiguous symbol characters together (e.g., `<->+`).
+ * 3. It checks the Registry for the full string. If not found, it drops the last character
+ * (shrinking to `<->`) and checks again.
+ * 4. It repeats this backtracking process until the Registry confirms a match.
+ *
+ * @code
+ * // Example: User inputs "<->"
+ * // 1. Check "<" -> Found in Registry! Emit OPERATOR token.
+ * * // Example: User inputs "<->+"
+ * // 1. Check "<-+" -> Not found.
+ * // 2. Check "<->"  -> Found! Emit OPERATOR. Leave '+' for the next pass.
+ * @endcode
+ * This guarantees that new, complex operators can be added to the Registry without
+ * ever updating the Lexer's parsing logic.
+ *
+ * @section usage_sec Pipeline Interfacing
+ * Integrating the Lexer into the main CLI execution loop requires only a few steps:
+ * * @code
+ * // 1. Ensure the Registry is fully loaded with rules
+ * Registry math_registry;
+ * load_registry(math_registry);
+ *
+ * // 2. Instantiate the Lexer with a reference to the Registry
+ * Lexer lexer(math_registry);
+ *
+ * // 3. Pass the raw string to receive the Token vector
+ * std::vector<Token> token_stream = lexer.tokenize("sin(pi * 2)");
+ * @endcode
+ * * The resulting `token_stream` is then ready to be handed off to the Parser for
+ * Abstract Syntax Tree (AST) construction.
+ */
