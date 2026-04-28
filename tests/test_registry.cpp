@@ -7,6 +7,11 @@ TEST(SanityCheck, DoesGTestWork) {
     EXPECT_EQ(1, 1);
 }
 
+/**
+ * @class RegistryTest
+ * @brief Unit testing for \ref Registry module
+ * @details Tests lookups, metadata, math functions, functions, arity, errors, and type safety
+ */
 class RegistryTest : public ::testing::Test {
 protected:
     Registry reg;
