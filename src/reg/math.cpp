@@ -41,7 +41,7 @@ void load_standard_math(Registry& registry) {
     // ━━ LOGICAL OR ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({
         "||", 1, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return (std::get<double>(a) != 0.0 || std::get<double>(b) != 0.0) ? 1.0 : 0.0;
             }
@@ -53,7 +53,7 @@ void load_standard_math(Registry& registry) {
     // ━━ LOGICAL AND ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({
         "&&", 2, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return (std::get<double>(a) != 0.0 && std::get<double>(b) != 0.0) ? 1.0 : 0.0;
             }
@@ -65,7 +65,7 @@ void load_standard_math(Registry& registry) {
     // ━━ BITWISE OR ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({
         "|", 3, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return static_cast<double>(static_cast<int64_t>(std::get<double>(a)) | static_cast<int64_t>(std::get<double>(b)));
             }
@@ -77,7 +77,7 @@ void load_standard_math(Registry& registry) {
     // ━━ BITWISE XOR ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({
         "^", 4, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return static_cast<double>(static_cast<int64_t>(std::get<double>(a)) ^ static_cast<int64_t>(std::get<double>(b)));
             }
@@ -89,7 +89,7 @@ void load_standard_math(Registry& registry) {
     // ━━ BITWISE AND ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({
         "&", 5, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return static_cast<double>(static_cast<int64_t>(std::get<double>(a)) & static_cast<int64_t>(std::get<double>(b)));
             }
@@ -101,7 +101,7 @@ void load_standard_math(Registry& registry) {
     // ━━ EQUALITY / INEQUALITY ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({
         "==", 6, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return (std::get<double>(a) == std::get<double>(b)) ? 1.0 : 0.0;
             }
@@ -112,7 +112,7 @@ void load_standard_math(Registry& registry) {
 
     registry.register_operator({
         "!=", 6, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return (std::get<double>(a) != std::get<double>(b)) ? 1.0 : 0.0;
             }
@@ -124,7 +124,7 @@ void load_standard_math(Registry& registry) {
     // ━━ RELATIONAL (COMPARISON) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({
         "<", 7, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return (std::get<double>(a) < std::get<double>(b)) ? 1.0 : 0.0;
             }
@@ -135,7 +135,7 @@ void load_standard_math(Registry& registry) {
 
     registry.register_operator({
         "<=", 7, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return (std::get<double>(a) <= std::get<double>(b)) ? 1.0 : 0.0;
             }
@@ -145,7 +145,7 @@ void load_standard_math(Registry& registry) {
 
     registry.register_operator({
         ">", 7, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return (std::get<double>(a) > std::get<double>(b)) ? 1.0 : 0.0;
             }
@@ -156,7 +156,7 @@ void load_standard_math(Registry& registry) {
 
     registry.register_operator({
         ">=", 7, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return (std::get<double>(a) >= std::get<double>(b)) ? 1.0 : 0.0;
             }
@@ -167,7 +167,7 @@ void load_standard_math(Registry& registry) {
     // ━━ BITWISE SHIFTS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({
         "<<", 8, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return static_cast<double>(static_cast<int64_t>(std::get<double>(a)) << static_cast<int64_t>(std::get<double>(b)));
             }
@@ -177,7 +177,7 @@ void load_standard_math(Registry& registry) {
 
     registry.register_operator({
         ">>", 8, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return static_cast<double>(static_cast<int64_t>(std::get<double>(a)) >> static_cast<int64_t>(std::get<double>(b)));
             }
@@ -187,7 +187,7 @@ void load_standard_math(Registry& registry) {
 
     // ━━ ADDITION AND SUBTRACTION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({ "+", 9, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return std::get<double>(a) + std::get<double>(b);
             }
@@ -199,7 +199,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "-", 9, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return std::get<double>(a) - std::get<double>(b);
             }
@@ -211,7 +211,7 @@ void load_standard_math(Registry& registry) {
 
     // ━━ MULTIPLICATION, DIVISION, AND MODULO ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({ "*", 10, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return std::get<double>(a) * std::get<double>(b);
             }
@@ -224,7 +224,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "/", 10, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 double denom = std::get<double>(b);
                 if (denom == 0.0) throw std::runtime_error("Division by zero");
@@ -237,7 +237,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "%", 10, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 double denom = std::get<double>(b);
                 if (denom == 0.0) throw std::runtime_error("Modulo by zero");
@@ -248,7 +248,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "//", 10, Associativity::LEFT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 double denom = std::get<double>(b);
                 if (denom == 0.0) throw std::runtime_error("Division by zero");
@@ -269,7 +269,7 @@ void load_standard_math(Registry& registry) {
 
     // ━━ EXPONENTIATION ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({ "**", 11, Associativity::RIGHT, false,
-        [](Value a, Value b) -> Value {
+        [](const Value& a, const Value& b) -> Value {
             if (std::holds_alternative<double>(a) && std::holds_alternative<double>(b)) {
                 return std::pow(std::get<double>(a), std::get<double>(b));
             }
@@ -288,7 +288,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "u-", 12, Associativity::NONE, true, nullptr,
-        [](Value a) -> Value {
+        [](const Value& a) -> Value {
             if (std::holds_alternative<double>(a)) return -std::get<double>(a);
             // TODO: Negate every component in a Vector/Matrix
             throw std::runtime_error("Type Error: Invalid type for unary -");
@@ -296,7 +296,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "u~", 12, Associativity::NONE, true, nullptr,
-        [](Value a) -> Value {
+        [](const Value& a) -> Value {
             if (std::holds_alternative<double>(a)) return static_cast<double>(~static_cast<int64_t>(std::get<double>(a)));
             // TODO: Complex Conjugate if 'a' is a complex number
             throw std::runtime_error("Type Error: Invalid type for unary ~");
@@ -304,7 +304,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "u!", 12, Associativity::NONE, true, nullptr,
-        [](Value a) -> Value {
+        [](const Value& a) -> Value {
             if (std::holds_alternative<double>(a)) return (std::get<double>(a) == 0.0) ? 1.0 : 0.0;
             throw std::runtime_error("Type Error: Invalid type for unary !");
         }
@@ -312,9 +312,9 @@ void load_standard_math(Registry& registry) {
 
     // ━━ POSTFIX UNARY OPERATORS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({ "p!", 13, Associativity::NONE, true, nullptr,
-        [](Value a) -> Value {
+        [](const Value& a) -> Value {
             if (std::holds_alternative<double>(a)) {
-                double val = std::get<double>(a);
+                const double val = std::get<double>(a);
                 if (val < 0.0 && std::floor(val) == val) throw std::runtime_error("Factorial of negative integer is undefined");
                 return std::tgamma(val + 1.0);
             }
@@ -323,7 +323,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "p%", 13, Associativity::NONE, true, nullptr,
-        [](Value a) -> Value {
+        [](const Value& a) -> Value {
             if (std::holds_alternative<double>(a)) return std::get<double>(a) / 100.0;
             throw std::runtime_error("Type Error: Percentage requires a scalar double.");
         }
@@ -334,10 +334,10 @@ void load_standard_math(Registry& registry) {
 
     // ━━ IMPLICATION AND EQUIVALENCE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     registry.register_operator({ "->", 1, Associativity::RIGHT, false,
-        [](Value p, Value q) -> Value {
+        [](const Value& p, const Value& q) -> Value {
             if (std::holds_alternative<double>(p) && std::holds_alternative<double>(q)) {
-                bool p_bool = (std::get<double>(p) != 0.0);
-                bool q_bool = (std::get<double>(q) != 0.0);
+                const bool p_bool = (std::get<double>(p) != 0.0);
+                const bool q_bool = (std::get<double>(q) != 0.0);
                 return (!p_bool || q_bool) ? 1.0 : 0.0;
             }
             throw std::runtime_error("Type Error: -> requires scalar doubles.");
@@ -345,7 +345,7 @@ void load_standard_math(Registry& registry) {
     });
 
     registry.register_operator({ "<->", 1, Associativity::LEFT, false,
-        [](Value p, Value q) -> Value {
+        [](const Value& p, const Value& q) -> Value {
             if (std::holds_alternative<double>(p) && std::holds_alternative<double>(q)) {
                 return ((std::get<double>(p) != 0.0) == (std::get<double>(q) != 0.0)) ? 1.0 : 0.0;
             }
@@ -396,7 +396,7 @@ void load_functions(Registry& registry)
         "asin", 1,
         [](const std::vector<Value>& args) -> Value {
             if (std::holds_alternative<double>(args[0])) {
-                double val = std::get<double>(args[0]);
+                const double val = std::get<double>(args[0]);
                 if (val < -1.0 || val > 1.0) throw std::runtime_error("Domain Error: asin input must be between -1 and 1");
                 return std::asin(val);
             }
@@ -408,7 +408,7 @@ void load_functions(Registry& registry)
         "acos", 1,
         [](const std::vector<Value>& args) -> Value {
             if (std::holds_alternative<double>(args[0])) {
-                double val = std::get<double>(args[0]);
+                const double val = std::get<double>(args[0]);
                 if (val < -1.0 || val > 1.0) throw std::runtime_error("Domain Error: acos input must be between -1 and 1");
                 return std::acos(val);
             }
@@ -450,7 +450,7 @@ void load_functions(Registry& registry)
         "ln", 1,
         [](const std::vector<Value>& args) -> Value {
             if (std::holds_alternative<double>(args[0])) {
-                double val = std::get<double>(args[0]);
+                const double val = std::get<double>(args[0]);
                 if (val <= 0.0) throw std::runtime_error("Domain Error: ln requires a strictly positive number");
                 // TODO: If val < 0, return std::complex<double> instead of throwing an error
                 return std::log(val);
@@ -465,8 +465,8 @@ void load_functions(Registry& registry)
         "log", 2,
         [](const std::vector<Value>& args) -> Value {
             if (std::holds_alternative<double>(args[0]) && std::holds_alternative<double>(args[1])) {
-                double val = std::get<double>(args[0]);
-                double base = std::get<double>(args[1]);
+                const double val = std::get<double>(args[0]);
+                const double base = std::get<double>(args[1]);
 
                 // Strict mathematical domain constraints
                 if (val <= 0.0) throw std::runtime_error("Domain Error: logarithm value must be strictly positive");
@@ -485,9 +485,9 @@ void load_functions(Registry& registry)
         "sqrt", 1,
         [](const std::vector<Value>& args) -> Value {
             if (std::holds_alternative<double>(args[0])) {
-                double val = std::get<double>(args[0]);
+                const double val = std::get<double>(args[0]);
                 if (val < 0.0) {
-                    // Smart Dispatching preview: Return a complex number for negative roots!
+                    // Return a complex number for negative roots
                     return std::complex<double>(0.0, std::sqrt(-val));
                 }
                 return std::sqrt(val);
@@ -558,9 +558,9 @@ void load_functions(Registry& registry)
                 std::holds_alternative<double>(args[1]) &&
                 std::holds_alternative<double>(args[2])) {
 
-                double val = std::get<double>(args[0]);
-                double min_val = std::get<double>(args[1]);
-                double max_val = std::get<double>(args[2]);
+                const double val = std::get<double>(args[0]);
+                const double min_val = std::get<double>(args[1]);
+                const double max_val = std::get<double>(args[2]);
 
                 if (min_val > max_val) {
                     throw std::runtime_error("Domain Error: clamp 'min' cannot be greater than 'max'");

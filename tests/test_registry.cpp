@@ -3,11 +3,15 @@
 
 extern void load_registry(Registry& registry);
 
-
 TEST(SanityCheck, DoesGTestWork) {
     EXPECT_EQ(1, 1);
 }
 
+/**
+ * @class RegistryTest
+ * @brief Unit testing for \ref Registry module
+ * @details Tests lookups, metadata, math functions, functions, arity, errors, and type safety
+ */
 class RegistryTest : public ::testing::Test {
 protected:
     Registry reg;
@@ -36,29 +40,29 @@ TEST_F(RegistryTest, ReturnsCorrectPrecedence) {
 // ━━ 2. Test Binary Math ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TEST_F(RegistryTest, EvaluatesAddition) {
-    Value a = 5.0;
-    Value b = 3.5;
+    constexpr Value a = 5.0;
+    constexpr Value b = 3.5;
 
-    Value result = reg.evaluate_binary("+", a, b);
+    const Value result = reg.evaluate_binary("+", a, b);
 
     ASSERT_TRUE(std::holds_alternative<double>(result));
     EXPECT_DOUBLE_EQ(std::get<double>(result), 8.5);
 }
 
 TEST_F(RegistryTest, EvaluatesExponentiation) {
-    Value a = 2.0;
-    Value b = 3.0;
+    constexpr Value a = 2.0;
+    constexpr Value b = 3.0;
 
-    Value result = reg.evaluate_binary("**", a, b);
+    const Value result = reg.evaluate_binary("**", a, b);
     EXPECT_DOUBLE_EQ(std::get<double>(result), 8.0);
 }
 
 // ━━ 3. Test Functions & Arity ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TEST_F(RegistryTest, EvaluatesMathFunctions) {
-    std::vector<Value> args = { reg.get_constant("pi") }; // Pass Pi as an argument
+    const std::vector<Value> args = { reg.get_constant("pi") }; // Pass Pi as an argument
 
-    Value result = reg.evaluate_function("sin", args);
+    const Value result = reg.evaluate_function("sin", args);
 
     // sin(pi) should be extremely close to 0
     EXPECT_NEAR(std::get<double>(result), 0.0, 1e-9);
@@ -67,8 +71,8 @@ TEST_F(RegistryTest, EvaluatesMathFunctions) {
 // ━━ 4. Test Errors & Type Safety (The Sad Path) ━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 TEST_F(RegistryTest, ThrowsOnDivisionByZero) {
-    Value a = 10.0;
-    Value b = 0.0;
+    constexpr Value a = 10.0;
+    constexpr Value b = 0.0;
 
     EXPECT_THROW(reg.evaluate_binary("/", a, b), std::runtime_error);
 }
@@ -81,14 +85,9 @@ TEST_F(RegistryTest, ThrowsOnInvalidFunctionArity) {
 }
 
 TEST_F(RegistryTest, ThrowsOnInvalidTypes) {
-    Value num = 5.0;
-    Value vec = Vector{{1.0, 2.0, 3.0}}; // Assume Vector is defined in your types
+    constexpr Value num = 5.0;
+    const Value vec = Vector{{1.0, 2.0, 3.0}}; // Assume Vector is defined in your types
 
-    // We haven't implemented Scalar + Vector yet, so this should trigger your fallback!
+    // Should trigger fallback
     EXPECT_THROW(reg.evaluate_binary("+", num, vec), std::runtime_error);
-}
-
-int main(int argc, char **argv) {
-    ::testing::InitGoogleTest(&argc, argv);
-    return RUN_ALL_TESTS();
 }
