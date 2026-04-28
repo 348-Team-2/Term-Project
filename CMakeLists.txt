@@ -16,6 +16,10 @@ set(CLI_SOURCES
         src/cli/cli.cpp
 )
 
+set(PARSE_SOURCES
+    src/parse/parser.cpp
+)
+
 # ━━ LIBRARIES ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Bundle the registry into a library so it can be shared between Main and Tests
 add_library(RegistryLib ${REGISTRY_SOURCES})
@@ -24,10 +28,13 @@ target_include_directories(RegistryLib PUBLIC include)
 add_library(CLILib ${CLI_SOURCES})
 target_include_directories(CLILib PUBLIC include)
 
+add_library(ParseLib ${Parse_SOURCES})
+target_include_directories(ParseLib PUBLIC include)
+
 # ━━ EXECUTABLE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 add_executable(ParserMain src/main.cpp)
 
-target_link_libraries(ParserMain PRIVATE RegistryLib CLILib)
+target_link_libraries(ParserMain PRIVATE RegistryLib CLILib ParseLib)
 
 # Cross-platform compiler flags
 if(MSVC)
