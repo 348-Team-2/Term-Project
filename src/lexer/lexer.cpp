@@ -21,7 +21,7 @@ std::vector<Token*> tokens;
 
 //Token* token1 = new Token(TokenType::NUMBER, "2", new Value(2), 1, 4);
 
-class lexer {
+class Lexer {
     private:
         std::vector<Token*> tokens;
         std::string temp_str = "2+3*4\n";
