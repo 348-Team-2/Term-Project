@@ -89,8 +89,16 @@ void Lexer::process_operator() {
 }
 
 void Lexer::process_number() {
-    // Consume integer part
-    while (std::isdigit(peek())) advance();
+    // Consume integer part, allowing commas if followed by a digit
+    while (true) {
+        if (std::isdigit(peek())) {
+            advance();
+        } else if (peek() == ',' && std::isdigit(peek_next())) {
+            advance(); // Consume the comma since a digit follows it
+        } else {
+            break; // Stop at spaces, operators, or a lone comma
+        }
+    }
 
     // Handle fractional part
     if (peek() == '.' && std::isdigit(peek_next())) {
@@ -98,9 +106,19 @@ void Lexer::process_number() {
         while (std::isdigit(peek())) advance();
     }
 
-    const std::string num_str = source.substr(start, current - start);
-    double val = std::stod(num_str);
+    // Extract the raw string (which may contain commas)
+    const std::string raw_str = source.substr(start, current - start);
 
+    // Strip the commas out to create a clean string for std::stod
+    std::string clean_str;
+    clean_str.reserve(raw_str.length()); // Minor optimization
+    for (const char c : raw_str) {
+        if (c != ',') {
+            clean_str.push_back(c);
+        }
+    }
+
+    double val = std::stod(clean_str);
     add_token(TokenType::NUMBER, Value(val));
 }
 
