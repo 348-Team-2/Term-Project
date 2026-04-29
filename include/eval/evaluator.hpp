@@ -42,7 +42,8 @@ public:
  * @details All mathematical logic is delegated to the Registry. The Evaluator
  * contains no hardcoded arithmetic — it is purely a tree walker.
  */
-class Evaluator {
+class Evaluator
+{
 private:
     Registry& registry; ///< Non-owning reference to the active math Registry.
 
@@ -62,9 +63,41 @@ public:
     Value evaluate(const ASTNode& node);
 
 private:
-    // Node Handlers
+    /**
+     * @brief Extracts the immediate value from a literal leaf node.
+     * @param node The AST node containing a raw numeric or boolean value.
+     * @return The literal value stored within the node.
+     */
     Value eval_literal(const LiteralNode& node);
+
+    /**
+     * @brief Evaluates a binary operation by visiting left and right children.
+     * @details Recursively evaluates the operands, then queries the Registry
+     * to perform the operation (e.g., +, -, *, /) on the resulting Values.
+     * @param node The AST node representing the binary operator and its operands.
+     * @return The result of the operation.
+     * @throws EvalError If the Registry does not recognize the operator symbol.
+     */
     Value eval_binary(const BinaryOpNode& node);
+
+    /**
+     * @brief Evaluates a unary operation (e.g., negation) on a single child node.
+     * @details Recursively evaluates the single operand and delegates the
+     * transformation to the Registry.
+     * @param node The AST node representing the unary operator and its operand.
+     * @return The result of the unary operation.
+     * @throws EvalError If the operator is undefined or the operand type is invalid.
+     */
     Value eval_unary(const UnaryOpNode& node);
+
+    /**
+     * @brief Evaluates a function call by processing its argument list.
+     * @details Performs an evaluation on every argument in the node's vector
+     * of children, then passes the resulting vector of Values to the Registry
+     * to execute the named function.
+     * @param node The AST node containing the function name and argument nodes.
+     * @return The Value returned by the registered function.
+     * @throws EvalError If the function name is unknown or the argument count is incorrect.
+     */
     Value eval_function(const FunctionCallNode& node);
 };
