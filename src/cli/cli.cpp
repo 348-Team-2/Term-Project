@@ -37,12 +37,17 @@ void CLI::print_footer() {
     print("Exiting");
 }
 
-void CLI::print_error(const ParseError& e) {
+void CLI::print_error(const ParseError& e, const std::string* input) {
     // TODO (CLI Dev): Add terminal color codes (e.g., Red) or formatting here.
     print("Syntax Error: " + std::string(e.what()));
+
     print("  At token: '" + e.token.lexeme +
                      "' (Line " + std::to_string(e.token.line) +
                      ", Col " + std::to_string(e.token.column) + ")");
+    
+    if (input == nullptr) {
+        return; // No input provided
+    }
 }
 
 void CLI::print_value(const Value& val) {
