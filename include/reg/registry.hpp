@@ -10,7 +10,6 @@
 
 #include <string>
 #include <unordered_map>
-#include <stdexcept>
 #include <vector>
 
 #include "def_const.hpp"

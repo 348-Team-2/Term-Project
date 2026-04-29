@@ -1,5 +1,5 @@
 /**
- * @file token.hpp
+ * @file def_token.hpp
  * @brief Defines the foundational lexical units for the parsing pipeline.
  * @details This file contains the data structures used by the Lexer to categorize 
  * raw string input into structured, semantic units. These Tokens are then passed 
@@ -10,7 +10,7 @@
 
 #include <string>
 #include <utility>
-#include "def_value.hpp"
+#include "../reg/def_value.hpp"
 
 /**
  * @enum TokenType
@@ -73,6 +73,6 @@ struct Token {
      * @param l The line number for error tracking.
      * @param c The column index for error tracking.
      */
-    Token(TokenType t, std::string lex, Value val, int l, int c)
+    Token(const TokenType t, std::string lex, Value val, const int l, const int c)
         : type(t), lexeme(std::move(lex)), literal(std::move(val)), line(l), column(c) {}
 };

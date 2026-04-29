@@ -24,7 +24,16 @@ void Registry::register_function(const FunctionStruct& def) {
 // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 bool Registry::is_operator(const std::string& symbol) const {
-    return operators.contains(symbol);
+    // Direct check (for things like + or **)
+    if (operators.contains(symbol)) return true; // TODO: EXPLAIN THIS IN DOCS
+
+    // Unary prefix check (is there a 'u' version?)
+    if (operators.contains("u" + symbol)) return true;
+
+    // Postfix check (is there a 'p' version?)
+    if (operators.contains("p" + symbol)) return true;
+
+    return false;
 }
 
 bool Registry::is_const(const std::string& name) const
