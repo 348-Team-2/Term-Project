@@ -44,7 +44,6 @@ void CLI::print_footer() {
 }
 
 void CLI::print_error(const ParseError& e, const std::string* input) {
-    // TODO (CLI Dev): Add terminal color codes (e.g., Red) or formatting here.
     print("Syntax Error: " + std::string(Color::RED) + std::string(Color::RESET) + std::string(e.what()));
 
     print("  At token: '" + e.token.lexeme +
@@ -75,6 +74,3 @@ void CLI::print_error(const ParseError& e, const std::string* input) {
 void CLI::print_value(const Value& val) {
     print(to_string(val));
 }
-
-// TODO: Take a look at err/debug. Do you want to move that here? If so, make sure to edit the Engine.hpp file in
-// core/engine to use the correct functions.
