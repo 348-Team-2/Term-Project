@@ -35,7 +35,8 @@ public:
 
     /// @brief Prints an error message to the console.
     /// @param e The error from the Engine/Parser.
-    static void print_error(const ParseError& e); // TODO: Replace with Error generic?
+    /// @param input [Optional] The original user input that caused the error (for error position feature).
+    static void print_error(const ParseError& e, const std::string* input = nullptr); // TODO: Replace with Error generic?
 
     /// @brief Unpacks and prints the final mathematical Value.
     /// @param val The polymorphic result variant from the Evaluator.
