@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
+#include <sstream>
 #include <cctype>
 
 void CLI::print(const std::string& message) {
