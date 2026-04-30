@@ -63,7 +63,7 @@ public:
         Lexer lexer(registry);
         std::vector<Token> tokens = lexer.tokenize(input);
 
-        // print_token_stream(tokens); TODO: Move to occur on verbose
+        // print_token_stream(tokens);
 
         if (tokens.empty() || tokens.front().type == TokenType::EOF_TOKEN) {
             throw std::runtime_error("Empty expression.");
@@ -78,8 +78,6 @@ public:
         Evaluator evaluator(registry);
         Value result = evaluator.evaluate(*ast);
 
-        CLI::print_value(result);
-
-        return 0.0;
+        return result;
     };
 };

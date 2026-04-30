@@ -17,8 +17,14 @@
 
 // ━━ AST BASE CLASS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+/** @defgroup ASTNodes AST Nodes
+ *  These are the nodes which make up the AST
+ *  @{
+ */
+
 /**
  * @struct ASTNode
+ * @ingroup ASTNodes
  * @brief The polymorphic base class for all nodes in the AST.
  */
 struct ASTNode {
@@ -40,6 +46,7 @@ struct ASTNode {
 
 /**
  * @struct LiteralNode
+ * @ingroup ASTNodes
  * @brief Represents a raw numeric or mathematically constant value.
  */
 struct LiteralNode final : public ASTNode {
@@ -71,6 +78,7 @@ struct LiteralNode final : public ASTNode {
 
 /**
  * @struct BinaryOpNode
+ * @ingroup ASTNodes
  * @brief Represents an operation with a Left-Hand Side and Right-Hand Side.
  */
 struct BinaryOpNode final : public ASTNode {
@@ -102,6 +110,7 @@ struct BinaryOpNode final : public ASTNode {
 
 /**
  * @struct UnaryOpNode
+ * @ingroup ASTNodes
  * @brief Represents an operation requiring only a single operand (Prefix or Postfix).
  */
 struct UnaryOpNode final : public ASTNode {
@@ -129,6 +138,7 @@ struct UnaryOpNode final : public ASTNode {
 
 /**
  * @struct FunctionCallNode
+ * @ingroup ASTNodes
  * @brief Represents an n-ary mathematical function call (e.g., max, sin).
  */
 struct FunctionCallNode final : public ASTNode {
@@ -157,3 +167,6 @@ struct FunctionCallNode final : public ASTNode {
         return result;
     }
 };
+
+
+/** @} */ // end of ASTNodes
