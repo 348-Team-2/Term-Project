@@ -10,6 +10,7 @@
 
 #include "parse/parser.hpp"
 #include "reg/def_value.hpp"
+#include "eval/evaluator.hpp"
 
  /**
  * @class CLI
