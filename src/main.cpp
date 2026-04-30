@@ -27,7 +27,6 @@ int main() {
     } catch (const ParseError& e) {
         CLI::print_error(e);
 
-
     } catch (const std::exception& e) {
         CLI::print("Evaluation Error: " + std::string(e.what())); // TODO: REPLACE WITH ERROR?
     }
@@ -37,5 +36,7 @@ int main() {
     return 0;
 }
 
-//TODO: ADD DOX FOR EVAL
-//TODO: ADD DOXYCOMMENTS FOR EVAL/DEF_AST
+//TODO: EVAL ERROR
+//TODO: other val stuff
+//TODO: binary/hex/dynamic number base?
+//TODO: float
